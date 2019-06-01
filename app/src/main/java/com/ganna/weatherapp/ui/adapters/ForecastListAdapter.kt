@@ -1,10 +1,11 @@
-package com.ganna.weatherapp.adapters
+package com.ganna.weatherapp.ui.adapters
 
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.ganna.weatherapp.domain.model.ForecastList
 
-class ForecastListAdapter(val items : List<String>): RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
+class ForecastListAdapter(val weekForecast : ForecastList): RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
 
 
@@ -12,10 +13,12 @@ class ForecastListAdapter(val items : List<String>): RecyclerView.Adapter<Foreca
         return ViewHolder(TextView(parent.context))
     }
 
-    override fun getItemCount(): Int  = items.size
+    override fun getItemCount(): Int  = weekForecast.dailyForecast.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = items[position]
+       with(weekForecast.dailyForecast[position]){
+           holder.textView.text = "$date - $description - $high/$low"
+       }
     }
 
 
