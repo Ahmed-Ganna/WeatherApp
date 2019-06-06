@@ -1,4 +1,4 @@
-package com.ganna.weatherapp.ui.utils
+package com.ganna.weatherapp.extensions
 
 import android.content.Context
 import android.view.View

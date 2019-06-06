@@ -1,6 +1,7 @@
-package com.ganna.weatherapp.ui.utils
+package com.ganna.weatherapp.extensions
 
 import kotlin.reflect.KProperty
+
 
 object DelegatesExt {
     fun <T> notNullSingleValue() = NotNullSingleValueVar<T>()

@@ -1,7 +1,7 @@
 package com.ganna.weatherapp.ui
 
 import android.app.Application
-import com.ganna.weatherapp.ui.utils.DelegatesExt
+import com.ganna.weatherapp.extensions.DelegatesExt
 
 class App: Application() {
 

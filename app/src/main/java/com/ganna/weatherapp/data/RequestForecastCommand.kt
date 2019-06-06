@@ -2,13 +2,18 @@ package com.ganna.weatherapp.data
 
 import com.ganna.weatherapp.domain.Command
 import com.ganna.weatherapp.domain.model.ForecastList
-import com.ganna.weatherapp.mappers.ForecastDataMapper
+import com.ganna.weatherapp.provider.ForecastProvider
 
-class RequestForecastCommand(private val zipCode:String) : Command<ForecastList> {
+class RequestForecastCommand(private val zipCode:Long,
+                             val forecastProvider: ForecastProvider = ForecastProvider())
+    : Command<ForecastList> {
+
+    companion object {
+         val DAYS = 7
+         }
+
     override fun execute(): ForecastList {
-        val forecastRequest = ForecastRequest(zipCode)
-        return ForecastDataMapper().convertFromDataModel(forecastRequest.execute())
-    }
-
+         return forecastProvider.requestByZipCode(zipCode, DAYS)
+         }
 
 }

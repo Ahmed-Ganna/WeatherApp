@@ -7,9 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ganna.weatherapp.R
 import com.ganna.weatherapp.domain.model.Forecast
 import com.ganna.weatherapp.domain.model.ForecastList
-import com.ganna.weatherapp.ui.utils.ctx
+import com.ganna.weatherapp.extensions.ctx
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_forecast.view.*
+import java.text.DateFormat
+import java.util.*
 
 class ForecastListAdapter(val weekForecast : ForecastList,val itemClick: (Forecast)-> Unit): RecyclerView.Adapter<ForecastListAdapter.ViewHolder>() {
 
@@ -33,12 +35,17 @@ class ForecastListAdapter(val weekForecast : ForecastList,val itemClick: (Foreca
         fun bindForecast(forecast: Forecast){
             with(forecast){
                 Picasso.with(itemView.ctx).load(iconUrl).into(itemView.icon)
-                itemView.date.text = forecast.date
+                itemView.date.text = convertDate(forecast.date)
                 itemView.description.text = description
                 itemView.maxTemperature.text = "$high"
                 itemView.minTemperature.text = "$low"
                 itemView.setOnClickListener { itemClick(this) }
             }
+        }
+
+        private fun convertDate(date: Long): String {
+            val df = DateFormat.getDateInstance(DateFormat.MEDIUM, Locale.getDefault())
+            return df.format(date)
         }
 
     }

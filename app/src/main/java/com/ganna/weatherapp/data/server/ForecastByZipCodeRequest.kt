@@ -1,9 +1,9 @@
-package com.ganna.weatherapp.data
+package com.ganna.weatherapp.data.server
 
 import com.google.gson.Gson
 import java.net.URL
 
-class ForecastRequest(val zipCode: String) {
+class ForecastByZipCodeRequest(private val zipCode: Long, val gson: Gson = Gson()) {
 
 
     companion object {
@@ -14,6 +14,6 @@ class ForecastRequest(val zipCode: String) {
 
      fun execute(): ForecastResult {
         val forecastJsonStr = URL(COMPLETE_URL + zipCode).readText()
-        return Gson().fromJson(forecastJsonStr,ForecastResult::class.java)
+        return gson.fromJson(forecastJsonStr, ForecastResult::class.java)
     }
 }
